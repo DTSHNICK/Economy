@@ -1,6 +1,8 @@
 package View;
 
+import Controller.FirstTask;
 import Model.Period;
+import Model.TimeTable;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -61,199 +63,228 @@ public class Form extends JFrame {
     }
 
     private void calculateActionPerformed(ActionEvent e) {
-        if (table1.getColumnCount() == 3) {
-            {
-                DefaultTableModel softwareTable=new DefaultTableModel() {
-                    @Override
-                    public Class<?> getColumnClass(int columnIndex)
-                    {
-                        if ((columnIndex==2))
-                        {
-                            return Boolean.class;
-                        }
-                        return super.getColumnClass(columnIndex);
-                    }
-                };
-                //softwareTable.setRowCount(2);
-                softwareTable.addColumn("Product",new Object[]{"Windows 7","Microsoft Visual Studio" });
-                softwareTable.addColumn("Cost",new Object[]{670,4345});
-                softwareTable.addColumn("Is target software",new Object[]{false,true});
-                table5.setModel(softwareTable);
-            }
-
-
-
-
-
-            DefaultTableModel model= (DefaultTableModel) table1.getModel();
-
-
-            model.addColumn("Days");
-            for (int i=0;i<model.getRowCount();i++)
-            {
-                float Q = Float.parseFloat(model.getValueAt(i, 1).toString());
-                String performers= (String) model.getValueAt(i,2);
-                String performers_list[] = performers.split("\\s*,\\s*");
-
-                int R=performers_list.length;
-                model.setValueAt(Q/R, i, 3);
-            }
-
-            //add to actors
-            ArrayList<String>Actors=new ArrayList<>();
-            for (int i=0;i<model.getRowCount();i++)
-            {
-
-                ArrayList<String>Performers_list=new ArrayList<>(Arrays.asList(model.getValueAt(i, 2).toString().split("\\s*,\\s*")));
-                Actors.addAll(Performers_list);
-            }
-            Set<String> set =new HashSet<>(Actors);
-
-            ArrayList<String> jobs=new ArrayList<>();
-            jobs.addAll(set);
-            for (int i=0;i<jobs.size();i++)
-            {
-                System.out.println(jobs.get(i));
-            }
-            //finish
-            //crete timetable
-            DefaultTableModel timeTableModel=new DefaultTableModel() {
+        {
+            DefaultTableModel softwareTable = new DefaultTableModel() {
                 @Override
-                public Class<?> getColumnClass(int columnIndex)
-                {
-                    /*if (!getColumnName(columnIndex).equals("Description of work")) {
+                public Class<?> getColumnClass(int columnIndex) {
+                    if ((columnIndex == 2)) {
                         return Boolean.class;
-                    }*/
-                    if ((columnIndex!=0) && (columnIndex!=1))
-                    {
-                        return Boolean.class;
-                    }
-                    else
-                    {
-                        if (columnIndex==1)
-                        {
-                            return Period.class;
-                        }
                     }
                     return super.getColumnClass(columnIndex);
                 }
             };
-            timeTableModel.setRowCount(model.getRowCount());
-            timeTableModel.addColumn("Description of work");
-            timeTableModel.addColumn("Time");
-
-            //fin
-            //add jobs to table
-            for (int i=0;i<jobs.size();i++)
+            //softwareTable.setRowCount(2);
+            softwareTable.addColumn("\u041F\u0440\u043E\u0434\u0443\u043A\u0442", new Object[]{"Windows 7", "Microsoft Visual Studio"});
+            softwareTable.addColumn("\u0421\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u044C", new Object[]{670, 4345});
+            softwareTable.addColumn("\u0426\u0435\u043B\u0435\u0432\u043E\u0435\20\u041F\u041E", new Object[]{false, true});
+            table5.setModel(softwareTable);
+        }
+        if (2 == 2)
+        {
+            if (table1.getColumnCount() != 4)
             {
-                timeTableModel.addColumn(jobs.get(i));
+                DefaultTableModel model= (DefaultTableModel) table1.getModel();
+                model.addColumn("\u0414\u043D\u0438"); //Дни
+
+                String [][]data=new String[table1.getRowCount()][table1.getColumnCount()];
+                for (int i=0;i<table1.getRowCount();i++)
+                {
+                    for (int j=0;j<table1.getColumnCount()-1;j++)
+                    {
+                        data[i][j]= String.valueOf(table1.getValueAt(i,j));
+                        //System.out.print(data[i][j]+"\t");
+                    }
+                    //System.out.println();
+                }
+                data=FirstTask.calculateDays(data);
+                for (int i=0;i<model.getRowCount();i++)
+                {
+                    model.setValueAt(data[i][3],i,3);
+                }
+                ArrayList<String> jobs = FirstTask.findJob(data);
+
+                TimeTable timeTableModel = new TimeTable();
+                table2.setModel(timeTableModel);
+                timeTableModel.setRowCount(model.getRowCount());
+                timeTableModel.addColumn("\u041E\u043F\u0438\u0441\u0430\u043D\u0438\u0435\20\u0440\u0430\u0431\u043E\u0442\u044B");//Описание работы
+                timeTableModel.addColumn("\u0421\u0440\u043E\u043A\u0438\20\u0432\u044B\u043F\u043E\u043B\u043D\u0435\u043D\u0438\u044F");//Сроки выполнения
             }
-            //finish
-            //check performers and job
-
-            for (int i=0;i<model.getRowCount();i++)
+            else
             {
-                //take performers
-                String all_perform=new String(model.getValueAt(i,2).toString());
-                //drop perform
-                ArrayList<String>Performers_list=new ArrayList<>(Arrays.asList(all_perform.split("\\s*,\\s*")));
-                for (int j=0;j<Performers_list.size();j++) {
-                    for (int k = 0; k < timeTableModel.getColumnCount(); k++) {
-                        if (Performers_list.get(j).equals(timeTableModel.getColumnName(k)))
-                        {
-                            timeTableModel.setValueAt(true,i,k);
+
+                DefaultTableModel model= (DefaultTableModel) table1.getModel();
+                String [][]data=new String[table1.getRowCount()][table1.getColumnCount()];
+                for (int i=0;i<table1.getRowCount();i++)
+                {
+                    for (int j=0;j<table1.getColumnCount()-1;j++)
+                    {
+                        data[i][j]= String.valueOf(table1.getValueAt(i,j));
+                        //System.out.print(data[i][j]+"\t");
+                    }
+                    //System.out.println();
+                }
+                data=FirstTask.calculateDays(data);
+                for (int i=0;i<model.getRowCount();i++)
+                {
+                    model.setValueAt(data[i][3],i,3);
+                }
+            }
+
+        }
+        else {
+
+
+            if (table1.getColumnCount() == 3) {
+
+
+
+                DefaultTableModel model = (DefaultTableModel) table1.getModel();
+
+
+                model.addColumn("Days");
+                for (int i = 0; i < model.getRowCount(); i++) {
+                    float Q = Float.parseFloat(model.getValueAt(i, 1).toString());
+                    String performers = (String) model.getValueAt(i, 2);
+                    String performers_list[] = performers.split("\\s*,\\s*");
+
+                    int R = performers_list.length;
+                    model.setValueAt(Q / R, i, 3);
+                }
+
+                //add to actors
+                ArrayList<String> Actors = new ArrayList<>();
+                for (int i = 0; i < model.getRowCount(); i++) {
+
+                    ArrayList<String> Performers_list = new ArrayList<>(Arrays.asList(model.getValueAt(i, 2).toString().split("\\s*,\\s*")));
+                    Actors.addAll(Performers_list);
+                }
+                Set<String> set = new HashSet<>(Actors);
+
+                ArrayList<String> jobs = new ArrayList<>();
+                jobs.addAll(set);
+                for (int i = 0; i < jobs.size(); i++) {
+                    System.out.println(jobs.get(i));
+                }
+                //finish
+                //crete timetable
+                DefaultTableModel timeTableModel = new DefaultTableModel() {
+                    @Override
+                    public Class<?> getColumnClass(int columnIndex) {
+                    /*if (!getColumnName(columnIndex).equals("Description of work")) {
+                        return Boolean.class;
+                    }*/
+                        if ((columnIndex != 0) && (columnIndex != 1)) {
+                            return Boolean.class;
+                        } else {
+                            if (columnIndex == 1) {
+                                return Period.class;
+                            }
+                        }
+                        return super.getColumnClass(columnIndex);
+                    }
+                };
+                timeTableModel.setRowCount(model.getRowCount());
+                timeTableModel.addColumn("Description of work");
+                timeTableModel.addColumn("Time");
+
+                //fin
+                //add jobs to table
+                for (int i = 0; i < jobs.size(); i++) {
+                    timeTableModel.addColumn(jobs.get(i));
+                }
+                //finish
+                //check performers and job
+
+                for (int i = 0; i < model.getRowCount(); i++) {
+                    //take performers
+                    String all_perform = new String(model.getValueAt(i, 2).toString());
+                    //drop perform
+                    ArrayList<String> Performers_list = new ArrayList<>(Arrays.asList(all_perform.split("\\s*,\\s*")));
+                    for (int j = 0; j < Performers_list.size(); j++) {
+                        for (int k = 0; k < timeTableModel.getColumnCount(); k++) {
+                            if (Performers_list.get(j).equals(timeTableModel.getColumnName(k))) {
+                                timeTableModel.setValueAt(true, i, k);
+                            }
                         }
                     }
                 }
-            }
 
-            //fin
-            //take data from model to timemodel
+                //fin
+                //take data from model to timemodel
 
-            for (int i=0;i<model.getRowCount();i++)
-            {
-                timeTableModel.setValueAt(model.getValueAt(i,0),i,0);
-            }
-            //fin
-
-            //add period
-
-
-            ArrayList<Period> periods=new ArrayList<>();
-            try
-            {ArrayList<Integer> days=new ArrayList<>();
-                Period start=new Period(textField1.getText().toString());
-                for (int i=0;i<model.getRowCount();i++)
-                {
-                    days.add(Math.round(Float.parseFloat(model.getValueAt(i, model.getColumnCount() - 1).toString())));
-
+                for (int i = 0; i < model.getRowCount(); i++) {
+                    timeTableModel.setValueAt(model.getValueAt(i, 0), i, 0);
                 }
-                start.addDay(days.get(0));
+                //fin
 
-                periods.add(start);
-                for (int i=1;i<model.getRowCount();i++)
-                {
-                    Period period=new Period(periods.get(i-1).getEnd());
-                    period.addDay(days.get(i));
-                    periods.add(period);
-                }
-                for (int i=0;i<periods.size();i++)
-                {
-                    timeTableModel.setValueAt(periods.get(i),i,1);
-                }
-            }
-            catch (java.lang.NumberFormatException ex)
-            {
-                JOptionPane.showMessageDialog(this, "Error");
-            }
+                //add period
 
 
-            //fin
-            table1.setModel(model);
-            table2.setModel(timeTableModel);
-            //start calc finaces
+                ArrayList<Period> periods = new ArrayList<>();
+                try {
+                    ArrayList<Integer> days = new ArrayList<>();
+                    Period start = new Period(textField1.getText().toString());
+                    for (int i = 0; i < model.getRowCount(); i++) {
+                        days.add(Math.round(Float.parseFloat(model.getValueAt(i, model.getColumnCount() - 1).toString())));
 
-            DefaultTableModel finTable=new DefaultTableModel();
-            finTable.setRowCount(jobs.size());
-            finTable.addColumn("Position");
-            finTable.addColumn("Count");
-            finTable.addColumn("Emolument");
-            finTable.addColumn("Total Days");
-
-
-            for (int i=0;i<jobs.size();i++)
-            {
-                finTable.setValueAt(jobs.get(i),i,0);
-            }
-            for (int i=0;i<jobs.size();i++)
-            {
-                int time=0;
-                for (int j=0;j<timeTableModel.getRowCount();j++)
-                {
-                    if (timeTableModel.getValueAt(j,2+i)!=null)
-                    {
-                        int days=periods.get(j).getDays();
-                        time+=days;
                     }
-                }
-                finTable.setValueAt(time,i,3);
+                    start.addDay(days.get(0));
 
+                    periods.add(start);
+                    for (int i = 1; i < model.getRowCount(); i++) {
+                        Period period = new Period(periods.get(i - 1).getEnd());
+                        period.addDay(days.get(i));
+                        periods.add(period);
+                    }
+                    for (int i = 0; i < periods.size(); i++) {
+                        timeTableModel.setValueAt(periods.get(i), i, 1);
+                    }
+                } catch (java.lang.NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(this, "Error");
+                }
+
+
+                //fin
+                table1.setModel(model);
+                table2.setModel(timeTableModel);
+                //start calc finaces
+
+                DefaultTableModel finTable = new DefaultTableModel();
+                finTable.setRowCount(jobs.size());
+                finTable.addColumn("Position");
+                finTable.addColumn("Count");
+                finTable.addColumn("Emolument");
+                finTable.addColumn("Total Days");
+
+
+                for (int i = 0; i < jobs.size(); i++) {
+                    finTable.setValueAt(jobs.get(i), i, 0);
+                }
+                for (int i = 0; i < jobs.size(); i++) {
+                    int time = 0;
+                    for (int j = 0; j < timeTableModel.getRowCount(); j++) {
+                        if (timeTableModel.getValueAt(j, 2 + i) != null) {
+                            int days = periods.get(j).getDays();
+                            time += days;
+                        }
+                    }
+                    finTable.setValueAt(time, i, 3);
+
+                }
+                //fin
+                //add last day
+                double added = 0;
+                for (int i = 0; i < table1.getRowCount(); i++) {
+                    double k = Double.parseDouble(table1.getValueAt(i, table1.getColumnCount() - 1).toString());
+                    added += k;
+                }
+                Period start = new Period(textField1.getText());
+                start.addDay((int) added);
+                label24.setText(start.getFinish());
+                //fin
+                table3.setModel(finTable);
+                button4.setEnabled(true);
             }
-            //fin
-            //add last day
-            double added=0;
-            for (int i=0;i<table1.getRowCount();i++)
-            {
-                double k= Double.parseDouble(table1.getValueAt(i, table1.getColumnCount() - 1).toString());
-                added+=k;
-            }
-            Period start=new Period(textField1.getText());
-            start.addDay((int) added);
-            label24.setText(start.getFinish());
-            //fin
-            table3.setModel(finTable);
-            button4.setEnabled(true);
-        }
 
 
 /*
@@ -266,7 +297,7 @@ public class Form extends JFrame {
         }
         System.out.print(animals_list.length);
 */
-
+        }
     }
 
     private void button4ActionPerformed(ActionEvent e) {
