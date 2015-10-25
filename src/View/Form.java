@@ -1,6 +1,9 @@
+package View;
+
+import Model.Period;
+
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.geom.Arc2D;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.*;
@@ -58,9 +61,7 @@ public class Form extends JFrame {
     }
 
     private void calculateActionPerformed(ActionEvent e) {
-        if (table1.getColumnCount()==3)
-        {
-
+        if (table1.getColumnCount() == 3) {
             {
                 DefaultTableModel softwareTable=new DefaultTableModel() {
                     @Override
@@ -488,13 +489,13 @@ public class Form extends JFrame {
             //---- table1 ----
             table1.setModel(new DefaultTableModel(
                 new Object[][] {
-                    {"\u0410\u043d\u0430\u043b\u0438\u0437 \u041f\u0440\u041e", "10", "Programmer, Analyst"},
-                    {"\u041e\u043f\u0440\u0435\u0434\u0435\u043b\u0435\u043d\u0438\u0435 \u0442\u0440\u0435\u0431\u043e\u0432\u0430\u043d\u0438\u0439 \u043a \u041f\u041f", "10", "Programmer, Analyst"},
-                    {"\u041f\u0440\u043e\u0435\u043a\u0442\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435 \u0441\u0442\u0440\u0443\u043a\u0442\u0443\u0440\u044b \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u044b", "20", "Programmer, Analyst"},
-                    {"\u0420\u0430\u0437\u0440\u0430\u0431\u043e\u0442\u043a\u0430 \u0441\u0445\u0435\u043c\u044b \u0444\u0443\u043d\u043a\u0446\u0438\u043e\u043d\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u044f \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u044b", "10", "Programmer"},
-                    {"\u0421\u043e\u0437\u0434\u0430\u043d\u0438\u0435 \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u043d\u043e\u0433\u043e \u043a\u043e\u0434\u0430", "10", "Programmer"},
-                    {"\u0422\u0435\u0441\u0442\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435", "10", "Programmer, Analyst"},
-                    {"\u0421\u043e\u0441\u0442\u0430\u0432\u043b\u0435\u043d\u0438\u0435 \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u043d\u043e\u0439 \u0434\u043e\u043a\u0443\u043c\u0435\u043d\u0442\u0430\u0446\u0438\u0438 ", "10", "Programmer, Analyst"},
+                    {"\u0410\u043d\u0430\u043b\u0438\u0437 \u041f\u0440\u041e", "10", "\u041f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0438\u0441\u0442, \u0410\u043d\u0430\u043b\u0438\u0442\u0438\u043a"},
+                    {"\u041e\u043f\u0440\u0435\u0434\u0435\u043b\u0435\u043d\u0438\u0435 \u0442\u0440\u0435\u0431\u043e\u0432\u0430\u043d\u0438\u0439 \u043a \u041f\u041f", "10", "\u041f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0438\u0441\u0442, \u0410\u043d\u0430\u043b\u0438\u0442\u0438\u043a"},
+                    {"\u041f\u0440\u043e\u0435\u043a\u0442\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435 \u0441\u0442\u0440\u0443\u043a\u0442\u0443\u0440\u044b \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u044b", "20", "\u041f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0438\u0441\u0442, \u0410\u043d\u0430\u043b\u0438\u0442\u0438\u043a"},
+                    {"\u0420\u0430\u0437\u0440\u0430\u0431\u043e\u0442\u043a\u0430 \u0441\u0445\u0435\u043c\u044b \u0444\u0443\u043d\u043a\u0446\u0438\u043e\u043d\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u044f \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u044b", "10", "\u041f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0438\u0441\u0442"},
+                    {"\u0421\u043e\u0437\u0434\u0430\u043d\u0438\u0435 \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u043d\u043e\u0433\u043e \u043a\u043e\u0434\u0430", "10", "\u041f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0438\u0441\u0442"},
+                    {"\u0422\u0435\u0441\u0442\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435", "10", "\u041f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0438\u0441\u0442, \u0410\u043d\u0430\u043b\u0438\u0442\u0438\u043a"},
+                    {"\u0421\u043e\u0441\u0442\u0430\u0432\u043b\u0435\u043d\u0438\u0435 \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u043d\u043e\u0439 \u0434\u043e\u043a\u0443\u043c\u0435\u043d\u0442\u0430\u0446\u0438\u0438 ", "10", "\u041f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0438\u0441\u0442, \u0410\u043d\u0430\u043b\u0438\u0442\u0438\u043a"},
                 },
                 new String[] {
                     "\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0440\u0430\u0431\u043e\u0442\u044b", "\u0422\u0440\u0443\u0434\u043e\u0435\u043c\u043a\u043e\u0441\u0442\u044c", "\u0418\u0441\u043f\u043e\u043b\u043d\u0438\u0442\u0435\u043b\u0438"
@@ -504,15 +505,15 @@ public class Form extends JFrame {
         }
 
         //---- button1 ----
-        button1.setText("Add");
+        button1.setText("\u0414\u043e\u0431\u0430\u0432\u0438\u0442\u044c \u0440\u0430\u0431\u043e\u0442\u0443");
         button1.addActionListener(e -> addActionPerformed(e));
 
         //---- button2 ----
-        button2.setText("Remove");
+        button2.setText("\u0423\u0434\u0430\u043b\u0438\u0442\u044c \u0440\u0430\u0431\u043e\u0442\u0443");
         button2.addActionListener(e -> removeActionPerformed(e));
 
         //---- button3 ----
-        button3.setText("Calculate");
+        button3.setText("\u0420\u0430\u0441\u0447\u0438\u0442\u0430\u0442\u044c \u0433\u0440\u0430\u0444\u0438\u043a");
         button3.addActionListener(e -> calculateActionPerformed(e));
 
         //======== scrollPane2 ========
@@ -668,7 +669,7 @@ public class Form extends JFrame {
         button6.addActionListener(e -> button6ActionPerformed(e));
 
         //---- label5 ----
-        label5.setText("Project Start:");
+        label5.setText("\u041d\u0430\u0447\u0430\u043b\u043e \u043f\u0440\u043e\u0435\u043a\u0442\u0430");
 
         //---- label6 ----
         label6.setText("Fa");
@@ -886,14 +887,14 @@ public class Form extends JFrame {
                                 .addGroup(contentPaneLayout.createSequentialGroup()
                                     .addGroup(contentPaneLayout.createParallelGroup()
                                         .addGroup(contentPaneLayout.createSequentialGroup()
-                                            .addComponent(button5)
-                                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(button6))
+                                                .addComponent(button5)
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(button6))
                                         .addComponent(scrollPane5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                         .addGroup(contentPaneLayout.createSequentialGroup()
-                                            .addComponent(button7)
-                                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(button8)))
+                                                .addComponent(button7)
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(button8)))
                                     .addGap(0, 0, Short.MAX_VALUE))
                                 .addComponent(scrollPane4))))
                     .addGap(86, 86, 86))

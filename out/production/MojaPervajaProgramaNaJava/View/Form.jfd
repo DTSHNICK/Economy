@@ -17,37 +17,37 @@ new FormModel {
 						add( new java.util.Vector {
 							add( "Анализ ПрО" )
 							add( "10" )
-							add( "Programmer, Analyst" )
+							add( "Программист, Аналитик" )
 						} )
 						add( new java.util.Vector {
 							add( "Определение требований к ПП" )
 							add( "10" )
-							add( "Programmer, Analyst" )
+							add( "Программист, Аналитик" )
 						} )
 						add( new java.util.Vector {
 							add( "Проектирование структуры программы" )
 							add( "20" )
-							add( "Programmer, Analyst" )
+							add( "Программист, Аналитик" )
 						} )
 						add( new java.util.Vector {
 							add( "Разработка схемы функционирования программы" )
 							add( "10" )
-							add( "Programmer" )
+							add( "Программист" )
 						} )
 						add( new java.util.Vector {
 							add( "Создание программного кода" )
 							add( "10" )
-							add( "Programmer" )
+							add( "Программист" )
 						} )
 						add( new java.util.Vector {
 							add( "Тестирование" )
 							add( "10" )
-							add( "Programmer, Analyst" )
+							add( "Программист, Аналитик" )
 						} )
 						add( new java.util.Vector {
 							add( "Составление программной документации " )
 							add( "10" )
-							add( "Programmer, Analyst" )
+							add( "Программист, Аналитик" )
 						} )
 					}, new java.util.Vector {
 						add( "Описание работы" )
@@ -70,17 +70,17 @@ new FormModel {
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "button1"
-				"text": "Add"
+				"text": "Добавить работу"
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "addActionPerformed", true ) )
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "button2"
-				"text": "Remove"
+				"text": "Удалить работу"
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "removeActionPerformed", true ) )
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "button3"
-				"text": "Calculate"
+				"text": "Расчитать график"
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "calculateActionPerformed", true ) )
 			} )
 			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
@@ -233,7 +233,7 @@ new FormModel {
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label5"
-				"text": "Project Start:"
+				"text": "Начало проекта"
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label6"

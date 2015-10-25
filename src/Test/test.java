@@ -1,6 +1,9 @@
+package Test;
+
+import Model.Period;
+
 import java.awt.*;
 import java.awt.event.*;
-import java.util.regex.Pattern;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 import javax.swing.table.DefaultTableModel;
