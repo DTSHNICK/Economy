@@ -369,7 +369,7 @@ public class Form extends JFrame {
                         String finish=label24.getText();
                         Period p=new Period(start,finish);
                         int work=p.getDays()*8;
-                        //TODO TEXTFIELD4 TAKE VALUE
+
                     }
                     else
                     {
@@ -488,16 +488,16 @@ public class Form extends JFrame {
             //---- table1 ----
             table1.setModel(new DefaultTableModel(
                 new Object[][] {
-                    {"Analysis software", "10", "Programmer, Analyst"},
-                    {"Defining requirements for software", "10", "Programmer, Analyst"},
-                    {"Design", "20", "Programmer, Analyst"},
-                    {"Development scheme of the program ", "10", "Programmer"},
-                    {"Creating software code ", "10", "Programmer"},
-                    {"Testing", "10", "Programmer, Analyst"},
-                    {"Drawing documentation ", "10", "Programmer, Analyst"},
+                    {"\u0410\u043d\u0430\u043b\u0438\u0437 \u041f\u0440\u041e", "10", "Programmer, Analyst"},
+                    {"\u041e\u043f\u0440\u0435\u0434\u0435\u043b\u0435\u043d\u0438\u0435 \u0442\u0440\u0435\u0431\u043e\u0432\u0430\u043d\u0438\u0439 \u043a \u041f\u041f", "10", "Programmer, Analyst"},
+                    {"\u041f\u0440\u043e\u0435\u043a\u0442\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435 \u0441\u0442\u0440\u0443\u043a\u0442\u0443\u0440\u044b \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u044b", "20", "Programmer, Analyst"},
+                    {"\u0420\u0430\u0437\u0440\u0430\u0431\u043e\u0442\u043a\u0430 \u0441\u0445\u0435\u043c\u044b \u0444\u0443\u043d\u043a\u0446\u0438\u043e\u043d\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u044f \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u044b", "10", "Programmer"},
+                    {"\u0421\u043e\u0437\u0434\u0430\u043d\u0438\u0435 \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u043d\u043e\u0433\u043e \u043a\u043e\u0434\u0430", "10", "Programmer"},
+                    {"\u0422\u0435\u0441\u0442\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435", "10", "Programmer, Analyst"},
+                    {"\u0421\u043e\u0441\u0442\u0430\u0432\u043b\u0435\u043d\u0438\u0435 \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u043d\u043e\u0439 \u0434\u043e\u043a\u0443\u043c\u0435\u043d\u0442\u0430\u0446\u0438\u0438 ", "10", "Programmer, Analyst"},
                 },
                 new String[] {
-                    "Description of work", "Complexity", "Performer"
+                    "\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0440\u0430\u0431\u043e\u0442\u044b", "\u0422\u0440\u0443\u0434\u043e\u0435\u043c\u043a\u043e\u0441\u0442\u044c", "\u0418\u0441\u043f\u043e\u043b\u043d\u0438\u0442\u0435\u043b\u0438"
                 }
             ));
             scrollPane1.setViewportView(table1);
@@ -547,11 +547,7 @@ public class Form extends JFrame {
                 new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder(0, 0, 0, 0),
                     "JFormDesigner Evaluation", javax.swing.border.TitledBorder.CENTER,
                     javax.swing.border.TitledBorder.BOTTOM, new java.awt.Font("Dialog", java.awt.Font.BOLD, 12),
-                    java.awt.Color.red), panel1.getBorder())); panel1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent e) {
-                if ("border".equals(e.getPropertyName())) throw new RuntimeException();
-            }
-        });
+                    java.awt.Color.red), panel1.getBorder())); panel1.addPropertyChangeListener(new java.beans.PropertyChangeListener(){public void propertyChange(java.beans.PropertyChangeEvent e){if("border".equals(e.getPropertyName()))throw new RuntimeException();}});
 
 
             //---- label1 ----
@@ -615,8 +611,8 @@ public class Form extends JFrame {
                             .addComponent(label16, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                .addComponent(label25, GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
-                                .addComponent(label26, GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE))
+                            .addComponent(label25, GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
+                            .addComponent(label26, GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE))
                         .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             );
             panel1Layout.setVerticalGroup(
@@ -889,15 +885,15 @@ public class Form extends JFrame {
                                 .addComponent(panel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(contentPaneLayout.createSequentialGroup()
                                     .addGroup(contentPaneLayout.createParallelGroup()
-                                            .addGroup(contentPaneLayout.createSequentialGroup()
-                                                    .addComponent(button5)
-                                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                                    .addComponent(button6))
-                                            .addComponent(scrollPane5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(contentPaneLayout.createSequentialGroup()
-                                                    .addComponent(button7)
-                                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                                    .addComponent(button8)))
+                                        .addGroup(contentPaneLayout.createSequentialGroup()
+                                            .addComponent(button5)
+                                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(button6))
+                                        .addComponent(scrollPane5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(contentPaneLayout.createSequentialGroup()
+                                            .addComponent(button7)
+                                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(button8)))
                                     .addGap(0, 0, Short.MAX_VALUE))
                                 .addComponent(scrollPane4))))
                     .addGap(86, 86, 86))
